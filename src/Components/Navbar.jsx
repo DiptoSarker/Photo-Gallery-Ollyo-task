@@ -1,10 +1,17 @@
-import "../Styles/navbar.css";
 import React from "react";
-
-const Navbar = () => {
+import "../Styles/navbar.css";
+const Navbar = ({ counter, onDelete }) => {
   return (
     <div className="navbar">
-      <div className="logo">Gallery</div>
+      <div className="logo">
+        {counter > 0 ? `${counter} items selected` : "Gallery"}
+
+        {counter > 0 && (
+          <button className="btn" onClick={onDelete}>
+            Delete
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import "../Styles/card.css";
 import React, { useState } from "react";
 import imagee from "../assets/image-4.webp";
 
-const Card = () => {
+const Card = (onCardSelect, index) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -17,7 +17,10 @@ const Card = () => {
       />
       <div
         className={`checkmark ${isClicked ? "blue" : ""}`}
-        onClick={handleClick}
+        onClick={() => {
+          handleClick();
+          onCardSelect();
+        }}
       >
         ✔
       </div>

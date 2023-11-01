@@ -9,6 +9,7 @@ const Card12 = () => {
         <GrGallery class="upload-logo" />
         Add Images
       </label>
+
       <input
         type="file"
         id="image-upload"

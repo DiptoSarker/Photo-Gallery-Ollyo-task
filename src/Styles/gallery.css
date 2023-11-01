@@ -10,9 +10,16 @@
   grid-gap: 20px;
 }
 
+.card12 {
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px dashed #a1a1a1;
+}
 .card {
   color: aliceblue;
-  background-color: rgb(194, 194, 194);
+  background-color: rgb(255, 255, 255);
   border-radius: 8px;
   /* height: 182px;
   width: 240px; */
@@ -24,4 +31,96 @@
   grid-row-end: 3;
   grid-column-start: 1;
   grid-column-end: 3;
+}
+
+/* Responsive design starts............... */
+
+/* @media (max-width: 1450px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(155px, 1fr));
+  }
+} */
+
+@media (max-width: 1190px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 1059px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
+
+@media (max-width: 789px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(110px, 1fr));
+    grid-row-gap: 20px;
+  }
+}
+
+@media (max-width: 631px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(93px, 1fr));
+  }
+}
+
+@media (max-width: 526px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(83px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(83px, 1fr));
+  }
+}
+
+@media (max-width: 380px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(80px, 1fr));
+  }
+}
+
+@media (max-width: 360px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(80px, 1fr));
+  }
+}
+@media (max-width: 348px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(70px, 1fr));
+  }
+}
+
+@media (max-width: 309px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
+  }
+}
+
+@media (max-width: 269px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+  }
+}
+
+@media (max-width: 230px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+  }
+}
+@media (max-width: 190px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+  }
 }

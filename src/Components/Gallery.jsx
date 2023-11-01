@@ -1,5 +1,4 @@
 import "../Styles/gallery.css";
-
 import React from "react";
 import Card1 from "./Cards/Card1";
 import Card2 from "./Cards/Card2";
@@ -12,48 +11,57 @@ import Card8 from "./Cards/Card8";
 import Card9 from "./Cards/Card9";
 import Card10 from "./Cards/Card10";
 import Card11 from "./Cards/Card11";
-import Card12 from "./Cards/Card12";
+import Card12 from "./Cards/CArd12";
 
-const Gallery = () => {
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
+const cardComponents = [
+  Card1, // Remove the <Card1 /> syntax
+  Card2,
+  Card3,
+  Card4,
+  Card5,
+  Card6,
+  Card7,
+  Card8,
+  Card9,
+  Card10,
+  Card11,
+  Card12,
+];
+
+const Gallery = ({ onCardSelect }) => {
   return (
-    <div className="gallery">
-      <div className="card card1">
-        <Card1 />
-      </div>
-      <div className="card">
-        <Card2 />
-      </div>
-      <div className="card">
-        <Card3 />
-      </div>
-      <div className="card">
-        <Card4 />
-      </div>
-      <div className="card">
-        <Card5 />
-      </div>
-      <div className="card">
-        <Card6 />
-      </div>
-      <div className="card">
-        <Card7 />
-      </div>
-      <div className="card">
-        <Card8 />
-      </div>
-      <div className="card">
-        <Card9 />
-      </div>
-      <div className="card">
-        <Card10 />
-      </div>
-      <div className="card">
-        <Card11 />
-      </div>
-      <div className="card">
-        <Card12 />
-      </div>
-    </div>
+    <DragDropContext onDragEnd={() => {}}>
+      <Droppable droppableId="characters">
+        {(provided) => (
+          <div
+            className="gallery"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {cardComponents.map((CardComponent, index) => (
+              <Draggable
+                key={index}
+                draggableId={index.toString()}
+                index={index}
+              >
+                {(provided) => (
+                  <div
+                    className={`card card${index + 1}`}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                  >
+                    <CardComponent onCardSelect={onCardSelect} index={index} />
+                  </div>
+                )}
+              </Draggable>
+            ))}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 

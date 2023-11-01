@@ -1,0 +1,32 @@
+.upload-image-container {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px dashed #a1a1a1;
+  border-radius: 9px;
+  padding: 20px;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+}
+
+.upload-logo {
+  margin-top: 22px;
+  scale: 1.5;
+  margin-bottom: 5px;
+  display: block;
+  margin-left: 40px;
+}
+
+.upload-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.upload-input {
+  display: none;
+}

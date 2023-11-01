@@ -1,0 +1,27 @@
+.gallery {
+  background-color: #ffffff;
+
+  width: 95%;
+  height: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(175px, 1fr));
+  grid-gap: 20px;
+}
+
+.card {
+  color: aliceblue;
+  background-color: rgb(194, 194, 194);
+  border-radius: 8px;
+  /* height: 182px;
+  width: 240px; */
+  overflow: hidden;
+  border: 1px dotted rgb(231, 231, 231);
+}
+.card1 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}

@@ -11,11 +11,11 @@ img {
   object-fit: cover;
 }
 .image-container:hover .checkmark {
-  opacity: 1; /* Show the checkmark on hover */
+  opacity: 1;
   cursor: pointer;
 }
 .image-container:hover .image {
-  filter: brightness(70%); /* Darken the image on hover */
+  filter: brightness(70%);
   cursor: pointer;
   scale: 1.018;
 }
@@ -32,8 +32,6 @@ img {
 }
 
 .image.hovered {
-  /* Define your hover effect styles here */
-  /* For example, increase the brightness and add a border */
   filter: brightness(110%);
   border: 2px solid blue;
 }
@@ -51,4 +49,12 @@ img {
 .checkmark.blue {
   opacity: 1;
   color: blue;
+}
+
+@media (max-width: 420px) {
+  .checkmark {
+    top: 5px;
+    left: 5px;
+    font-size: 15px;
+  }
 }

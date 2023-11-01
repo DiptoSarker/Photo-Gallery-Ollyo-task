@@ -13,10 +13,8 @@ import Card10 from "./Cards/Card10";
 import Card11 from "./Cards/Card11";
 import Card12 from "./Cards/CArd12";
 
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
 const cardComponents = [
-  Card1, // Remove the <Card1 /> syntax
+  Card1,
   Card2,
   Card3,
   Card4,
@@ -30,38 +28,25 @@ const cardComponents = [
   Card12,
 ];
 
-const Gallery = ({ onCardSelect }) => {
+const Gallery = ({ onCardSelect, selectedCards, cards }) => {
+  console.log("Selected cards IDs:", selectedCards);
   return (
-    <DragDropContext onDragEnd={() => {}}>
-      <Droppable droppableId="characters">
-        {(provided) => (
-          <div
-            className="gallery"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {cardComponents.map((CardComponent, index) => (
-              <Draggable
-                key={index}
-                draggableId={index.toString()}
-                index={index}
-              >
-                {(provided) => (
-                  <div
-                    className={`card card${index + 1}`}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                  >
-                    <CardComponent onCardSelect={onCardSelect} index={index} />
-                  </div>
-                )}
-              </Draggable>
-            ))}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <div className="gallery">
+      {cards.map((card) => (
+        <div
+          key={card.id}
+          className={`card card${card.id} ${
+            selectedCards.includes(card.id) ? "selected" : ""
+          }`}
+          onClick={() => onCardSelect(card.id)}
+        >
+          {React.createElement(cardComponents[card.id - 1], {
+            key: card.id,
+            onCardSelect,
+          })}
+        </div>
+      ))}
+    </div>
   );
 };
 

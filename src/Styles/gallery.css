@@ -24,7 +24,7 @@
   /* height: 182px;
   width: 240px; */
   overflow: hidden;
-  border: 1px dotted rgb(231, 231, 231);
+  border: 1px dotted rgb(180, 180, 180);
 }
 .card1 {
   grid-row-start: 1;

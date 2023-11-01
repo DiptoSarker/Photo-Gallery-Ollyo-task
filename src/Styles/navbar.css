@@ -32,3 +32,14 @@
   color: #000000;
   font-weight: 900;
 }
+
+@media (max-width: 420px) {
+  .logo {
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 17px 30px;
+  }
+  .btn {
+    margin-top: -4px;
+  }
+}

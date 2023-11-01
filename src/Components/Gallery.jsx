@@ -11,7 +11,7 @@ import Card8 from "./Cards/Card8";
 import Card9 from "./Cards/Card9";
 import Card10 from "./Cards/Card10";
 import Card11 from "./Cards/Card11";
-import Card12 from "./Cards/CArd12";
+import Card12 from "./Cards/Card12";
 
 const cardComponents = [
   Card1,

@@ -1,4 +1,5 @@
 import "../Styles/gallery.css";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import React from "react";
 import Card1 from "./Cards/Card1";
 import Card2 from "./Cards/Card2";
@@ -31,22 +32,52 @@ const cardComponents = [
 const Gallery = ({ onCardSelect, selectedCards, cards }) => {
   console.log("Selected cards IDs:", selectedCards);
   return (
-    <div className="gallery">
-      {cards.map((card) => (
-        <div
-          key={card.id}
-          className={`card card${card.id} ${
-            selectedCards.includes(card.id) ? "selected" : ""
-          }`}
-          onClick={() => onCardSelect(card.id)}
-        >
-          {React.createElement(cardComponents[card.id - 1], {
-            key: card.id,
-            onCardSelect,
-          })}
-        </div>
-      ))}
-    </div>
+    <DragDropContext>
+      <Droppable droppableId="gallery">
+        {(provided) => (
+          <div className="all">
+            <div className="featured">
+              {/* <span className="txt1">Featured Image</span> */}
+              <div className="ftdImg" onClick={() => onCardSelect(1)}>
+                <Card1 />
+              </div>
+              <span className="txt1">Featured Image</span>
+            </div>
+            <div
+              className="gallery"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {cards.map((card, index) => (
+                <Draggable
+                  key={card.id}
+                  draggableId={card.id.toString()}
+                  index={index}
+                >
+                  {(provided) => (
+                    <div
+                      {...provided.draggableProps}
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      key={card.id}
+                      className={`card card${card.id} ${
+                        selectedCards.includes(card.id) ? "selected" : ""
+                      }`}
+                      onClick={() => onCardSelect(card.id)}
+                    >
+                      {React.createElement(cardComponents[card.id - 1], {
+                        key: card.id,
+                        onCardSelect,
+                      })}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+            </div>
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 

@@ -1,14 +1,14 @@
 img {
-  background-size: cover; /* Make the image cover the entire div */
-  background-position: center; /* Center the image within the div */
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  height: 90%;
+  height: 100%;
   object-fit: fill;
   transition: filter 0.3s;
 }
 .image {
   transition: 0.4s;
-  object-fit: cover;
+  object-fit: fill;
 }
 .image-container:hover .checkmark {
   opacity: 1;
@@ -41,14 +41,14 @@ img {
   top: 10px;
   left: 10px;
   font-size: 24px;
-  color: white;
+  color: #0087ee;
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .checkmark.blue {
   opacity: 1;
-  color: blue;
+  color: rgb(58, 58, 255);
 }
 
 @media (max-width: 420px) {

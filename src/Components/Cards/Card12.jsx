@@ -7,7 +7,7 @@ const Card12 = () => {
     <div class="upload-image-container">
       <label for="image-upload" class="upload-label">
         <GrGallery class="upload-logo" />
-        Add Image
+        <span> Add Image</span>
       </label>
 
       <input

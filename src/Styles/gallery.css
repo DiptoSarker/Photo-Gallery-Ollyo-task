@@ -5,6 +5,7 @@
   margin: auto;
   display: flex;
 }
+
 .featured {
   flex: 3.5;
   background-color: #ffffff;

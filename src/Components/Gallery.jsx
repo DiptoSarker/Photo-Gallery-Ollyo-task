@@ -1,6 +1,6 @@
 import "../Styles/gallery.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import React from "react";
+import React, { useState } from "react";
 import Card1 from "./Cards/Card1";
 import Card2 from "./Cards/Card2";
 import Card3 from "./Cards/Card3";
@@ -30,10 +30,18 @@ const cardComponents = [
 ];
 
 const Gallery = ({ onCardSelect, selectedCards, cards }) => {
-  console.log("Selected cards IDs:", selectedCards);
+  // console.log("Selected cards IDs:", selectedCards);
+  const [oldCard, updateCard] = useState(cards);
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
+    const items = Array.from(oldCard);
+    const [reorderItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderItem);
+    updateCard(items);
+  }
   return (
-    <DragDropContext>
-      <Droppable droppableId="gallery">
+    <DragDropContext onDragEnd={handleOnDragEnd}>
+      <Droppable droppableId="oldCard">
         {(provided) => (
           <div className="all">
             <div className="featured">
@@ -48,7 +56,7 @@ const Gallery = ({ onCardSelect, selectedCards, cards }) => {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {cards.map((card, index) => (
+              {oldCard.map((card, index) => (
                 <Draggable
                   key={card.id}
                   draggableId={card.id.toString()}
@@ -73,6 +81,7 @@ const Gallery = ({ onCardSelect, selectedCards, cards }) => {
                   )}
                 </Draggable>
               ))}
+              {provided.placeholder}
             </div>
           </div>
         )}

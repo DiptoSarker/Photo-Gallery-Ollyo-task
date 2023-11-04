@@ -1,28 +1,19 @@
-import "../../Styles/card.css";
-import React, { useState } from "react";
-import imagee from "../../assets/image-2.webp";
+import React from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-const Card2 = ({ onCardSelect, index }) => {
-  // Use an object to receive props
-  const [isClicked, setIsClicked] = useState(false);
+export function SortableItem(props) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: props.id });
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
   };
 
   return (
-    <div
-      className={`image-container ${isClicked ? "decrease-opacity,blue" : ""}`}
-      onClick={handleClick}
-    >
-      <img
-        src={imagee}
-        alt="Your"
-        className={`image ${isClicked ? "blue" : ""}`}
-      />
-      <div className={`checkmark ${isClicked ? "blue" : ""}`}>✔</div>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {/* ... */}
     </div>
   );
-};
-
-export default Card2;
+}

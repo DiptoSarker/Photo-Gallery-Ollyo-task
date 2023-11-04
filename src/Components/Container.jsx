@@ -35,7 +35,7 @@ const Container = () => {
       (card) => !selectedCards.includes(card.id)
     );
     setCards(updatedCards);
-    setSelectedCards([]);
+    setSelectedCards([]); // Clear the selectedCards state
   };
 
   return (

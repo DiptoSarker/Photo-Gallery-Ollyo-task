@@ -1,93 +1,91 @@
 import "../Styles/gallery.css";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import React, { useState } from "react";
-import Card1 from "./Cards/Card1";
-import Card2 from "./Cards/Card2";
-import Card3 from "./Cards/Card3";
-import Card4 from "./Cards/Card4";
-import Card5 from "./Cards/Card5";
-import Card6 from "./Cards/Card6";
-import Card7 from "./Cards/Card7";
-import Card8 from "./Cards/Card8";
-import Card9 from "./Cards/Card9";
-import Card10 from "./Cards/Card10";
-import Card11 from "./Cards/Card11";
-import Card12 from "./Cards/Card12";
 
-const cardComponents = [
-  Card1,
-  Card2,
-  Card3,
-  Card4,
-  Card5,
-  Card6,
-  Card7,
-  Card8,
-  Card9,
-  Card10,
-  Card11,
-  Card12,
-];
+import React, { useState } from "react";
+import pic1 from "../assets/image-1.webp";
+import pic2 from "../assets/image-2.webp";
+import pic3 from "../assets/image-3.webp";
+import pic4 from "../assets/image-4.webp";
+import pic5 from "../assets/image-5.webp";
+import pic6 from "../assets/image-6.webp";
+import pic7 from "../assets/image-7.webp";
+import pic8 from "../assets/image-8.webp";
+import pic9 from "../assets/image-9.webp";
+import pic10 from "../assets/image-10.jpeg";
+import pic11 from "../assets/image-11.jpeg";
+import dnd from "../assets/dnd.jpeg";
+import Card1 from "./Cards/Card1";
+import { useDrop } from "react-dnd";
 
 const Gallery = ({ onCardSelect, selectedCards, cards }) => {
-  // console.log("Selected cards IDs:", selectedCards);
-  const [oldCard, updateCard] = useState(cards);
-  function handleOnDragEnd(result) {
-    if (!result.destination) return;
-    const items = Array.from(oldCard);
-    const [reorderItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderItem);
-    updateCard(items);
-  }
+  const [images, setImages] = useState([
+    pic1,
+    pic2,
+    pic3,
+    pic4,
+    pic5,
+    pic6,
+    pic7,
+    pic8,
+    pic9,
+    pic10,
+    pic11,
+  ]);
+
+  const [feature, setFeature] = useState([dnd]);
+
+  const [{ isOver }, addToFeatureRef] = useDrop({
+    accept: "card",
+    collect: (monitor) => ({ isOver: !!monitor.isOver() }),
+  });
+
+  const [{ isOver: isCardOver }, removeFromFeatureRef] = useDrop({
+    accept: "feature",
+    collect: (monitor) => ({ isOver: !!monitor.isOver() }),
+  });
+
+  const moveCardToFeature = (image) => {
+    setImages((prev) => prev.filter((_, index) => index !== image.index));
+    setFeature((prev) => [image, ...prev]);
+  };
+
+  const reMoveCardToFeature = (image, index) => {
+    setFeature((prev) => prev.filter((_, i) => i !== index));
+    setImages((prev) => [...prev, image]);
+  };
+
   return (
-    <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="oldCard">
-        {(provided) => (
-          <div className="all">
-            <div className="featured">
-              {/* <span className="txt1">Featured Image</span> */}
-              <div className="ftdImg" onClick={() => onCardSelect(1)}>
-                <Card1 />
-              </div>
-              <span className="txt1">Featured Image</span>
+    <div className="all">
+      <div className="featured">
+        <div className="ftdImg" ref={addToFeatureRef}>
+          {feature.map((image, index) => (
+            <div className="card">
+              <Card1
+                key={index}
+                item={image}
+                index={index}
+                type="feature"
+                onDropPlayer={() => reMoveCardToFeature(image, index)}
+              />
             </div>
-            <div
-              className="gallery"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {oldCard.map((card, index) => (
-                <Draggable
-                  key={card.id}
-                  draggableId={card.id.toString()}
-                  index={index}
-                >
-                  {(provided) => (
-                    <div
-                      {...provided.draggableProps}
-                      ref={provided.innerRef}
-                      {...provided.dragHandleProps}
-                      key={card.id}
-                      className={`card card${card.id} ${
-                        selectedCards.includes(card.id) ? "selected" : ""
-                      }`}
-                      onClick={() => onCardSelect(card.id)}
-                    >
-                      {React.createElement(cardComponents[card.id - 1], {
-                        key: card.id,
-                        onCardSelect,
-                      })}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
+          ))}
+        </div>
+        <span className="txt1">Featured Image</span>
+      </div>
+
+      <div className="gallery" ref={removeFromFeatureRef}>
+        {images.map((image, index) => (
+          <div className="card">
+            <Card1
+              key={index}
+              item={image}
+              index={index}
+              type="card"
+              onDropPlayer={() => moveCardToFeature(image, index)}
+            />
           </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+        ))}
+      </div>
+    </div>
   );
 };
-
 export default Gallery;

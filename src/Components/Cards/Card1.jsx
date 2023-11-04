@@ -1,26 +1,33 @@
 import "../../Styles/card.css";
 import React, { useState } from "react";
-import imagee from "../../assets/image-1.webp";
+import { useDrag } from "react-dnd";
+const Card1 = ({ item, index, type, onDropPlayer }) => {
+  //const [isClicked, setIsClicked] = useState(false);
 
-const Card1 = ({ onCardSelect, index }) => {
-  const [isClicked, setIsClicked] = useState(false);
+  // const handleClick = () => {
+  //   setIsClicked(!isClicked);
+  //   onCardSelect(index);
+  // };
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-    onCardSelect(index);
-  };
+  const [{ isDraggble }, dragRef] = useDrag({
+    type: type,
+    item: () => ({ ...item, index }),
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult();
+
+      if (dropResult && item) {
+        onDropPlayer(item);
+      }
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
 
   return (
-    <div
-      className={`image-container ${isClicked ? "decrease-opacity,blue" : ""}`}
-      onClick={handleClick}
-    >
-      <img
-        src={imagee}
-        alt="Your"
-        className={`image ${isClicked ? "blue" : ""}`}
-      />
-      <div className={`checkmark ${isClicked ? "blue" : ""}`}>✔</div>
+    <div className={`image-container`} ref={dragRef}>
+      <img src={item} alt="Your moja" className={"image"} />
+      <div className={`checkmark`}>✔</div>
     </div>
   );
 };
